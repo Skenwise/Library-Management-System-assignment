@@ -1,0 +1,51 @@
+This is a requirememt document for the Library management system assignment
+
+Due date: March 31st, 2025
+Days remaining: 15
+Group work
+
+LMS design:
+
+A system to efficiently organize manage, and store information related to books, periodicals and other media.
+Provide a centralized platform for managing Library resources, tracking book loans, and returns and streamlining the overall operation of the library.
+
+it support library staff in inventory management.
+
+tools:
+- linked list: to manage a dynamic collection of books and media resources
+- Stack: record history of modification and transiction book check ins, book chekc-outs and metadata.
+- hash Table: to optimize search operation based on book attributes such as ISBN, title or author
+- Sorting algorithm: display of library items based on various attributes
+- Searching attribute: retrieval of book information
+
+operation:
+- CRUD operation
+- display options
+- Search mechanism
+
+Strategy:
+OOP appraoch to build our system  
+
+one module to store the data structure class of our program
+one module to store the object class of our program
+one module to store our different algorithm
+the main file that will contain our program and call the object and function
+
+- DSA class should contain:
+linked list class
+stack class
+hash table class
+
+- object class should contain
+user class
+library manager class
+library transiction system class
+library metadata class
+
+- algorithm module should contain:
+searching algorithm
+soritng algorithm
+
+the Main file will import other module to use them this design decision has been made to keep things clear and simple, OOP is the standard approach  for big and complex problems.
+
+The use of SQL may be require to store our data permanently.
