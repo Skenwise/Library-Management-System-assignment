@@ -7,16 +7,10 @@ from system_module_class import Book
 userName = input("Enter your name: ")
 age = int(input("Enter your age: "))
 profession = input("Enter your profession: ")
-bookTitle = input("Enter the title of your book: ")
 
 user1 = User(userName, age, profession)
+user1.register_new_user()
+user1.is_register()
 table = LMS_hastable()
-book = Book(bookTitle) 
 
-ISBN = input("Enter the ISBN of your book: ")
-capacity = int(input("Enter the capacity of the table: "))
-table_capacity = table.set_table_capacity(capacity)
-index = table.hashFunction(ISBN)
-print(index)
-print(book)
-print(user1)
+

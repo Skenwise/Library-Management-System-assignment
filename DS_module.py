@@ -120,6 +120,10 @@ class LMS_hastable(HashTable):
                 return 
             else:
                 self.list_of_book[index].append([ISBN, book])
+    
+    def display_list_of_book(self):
+        print(self.list_of_book)
+
 
 # this class represent a stack data structure FILO to handle data
 
@@ -254,12 +258,4 @@ class LinkedList:
                 current = current.next
             print("None") # end of the list
 
-# implementation of th inheritance principle
 
-table = LMS_hastable()
-
-ISBN = input("Enter the ISBN of your book: ")
-capacity = int(input("Enter the capacity of the table: "))
-table_capacity = table.set_table_capacity(capacity)
-index = table.hashFunction(ISBN)
-print(index)
