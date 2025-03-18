@@ -39,8 +39,6 @@ class User:
     def look_for_a_book(self):
         return False
 
-    def buy_a_book(self):
-        return False
 
 
 # this class define different properties of a book and behavior
@@ -57,6 +55,7 @@ class Book:
         self.availability = None
         self.borrowe_id = None
         self.due_date = None
+        self.list_of_book = LMS_hastable()
 
 
     def __str__(self):
@@ -71,5 +70,15 @@ class Book:
         self.genre = input("Enter the name of the genre of the book: ")
         self.publisher = input("Enter the name of the publisher of the book: ")
         self.language = input("Enter the name of the language in which the book was written: ")
-  
+
+    def add_book_to_library(self, bookTitle, ISBN):
+        self.list_of_book.insert_book(ISBN, bookTitle)
+        print("Book has been added to the Library successfully. ")
+
+    def display_book_in_library(self):
+        self.list_of_book.display_list_of_book()
+
+    def find_book_in_library(self, ISBN):
+        book = self.list_of_book.find_book(ISBN)
+
 # this class handle library basic operation 

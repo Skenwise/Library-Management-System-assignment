@@ -10,7 +10,10 @@ profession = input("Enter your profession: ")
 
 user1 = User(userName, age, profession)
 user1.register_new_user()
-user1.is_register()
 table = LMS_hastable()
+bookTitle = input("Enter the title of the book: ")
+ISBN = input("Enter ISBN: ")
 
+book = Book(bookTitle)
+book.add_book_to_library(bookTitle, ISBN)
 

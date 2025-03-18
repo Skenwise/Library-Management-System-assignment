@@ -98,32 +98,37 @@ class HashTable:
 class LMS_hastable(HashTable):
     def __init__(self):
         self.capacity = 100
-        self.ascii_value = 0
-        list_of_book = [[] for _ in range(self.capacity)]
-   
+        self.library = [[] for _ in range(self.capacity)]
+  
+    # find the ascii value of a number
     def find_number_value(self, number):
         value = ord(number)
         return value
 
     def hashFunction(self, ISBN):
+        ascii_value = 0
         numbers = self.split_word_into_letter(ISBN)
         for number in numbers:
-            self.ascii_value += self.find_number_value(number)
-        index = self.findIndex(self.ascii_value, self.capacity)
+            ascii_value += self.find_number_value(number)
+        index = self.findIndex(ascii_value, self.capacity)
         return index
 
-    def insert_book(self, ISBN, book):
-        index = hashFunction(ISBN)
-        for pair in self.list_of_book[index]:
-            if pair[0] == ISBN:
-                pair[1] = book
-                return 
-            else:
-                self.list_of_book[index].append([ISBN, book])
-    
+    def insert_book(self, ISBN, bookTitle):
+        index = self.hashFunction(ISBN)
+        self.library.insert(index, ([ISBN, bookTitle]))
+        print("book added")
+   
     def display_list_of_book(self):
-        print(self.list_of_book)
+        print(self.library)
 
+    def delete_book(self, ISBN):
+        for book in self.library:
+            if book[0] == ISBN:
+                self.library.remove(book)
+
+    def find_book(self, ISBN):
+        index = self.hashFunction(ISBN)
+        return self.library[index]
 
 # this class represent a stack data structure FILO to handle data
 
