@@ -1,3 +1,6 @@
+from algorithm import Algorithms
+
+
 # this class represent a hash table to store table in the table using hash function
 
 class HashTable:
@@ -98,8 +101,14 @@ class HashTable:
 class LMS_hastable(HashTable):
     def __init__(self):
         self.capacity = 100
-        self.library = [[] for _ in range(self.capacity)]
-  
+        self.library = [{} for _ in range(self.capacity)]
+
+    def __len__(self):
+        return self.capacity
+
+    def __getitem__(self, index):
+        return self.library[index]
+    
     # find the ascii value of a number
     def find_number_value(self, number):
         value = ord(number)
@@ -113,13 +122,15 @@ class LMS_hastable(HashTable):
         index = self.findIndex(ascii_value, self.capacity)
         return index
 
-    def insert_book(self, ISBN, bookTitle):
+    def insert_book(self, ISBN, book):
         index = self.hashFunction(ISBN)
-        self.library.insert(index, ([ISBN, bookTitle]))
+        self.library.insert(index, ({'book': book}))
         print("book added")
    
     def display_list_of_book(self):
-        print(self.library)
+        filtered_library_book = [book for book in self.library if "book" in book]
+        print(filtered_library_book)
+
 
     def delete_book(self, ISBN):
         for book in self.library:
@@ -217,50 +228,59 @@ class Node:
 
 class LinkedList:
     def __init__(self):
-        self.head = None    # the list start empty
+        self.head_node = None    # the list start empty
+        self.tail_node = None    
 
-    def insert_at_beginning(self, data):
-        print(data)
+    def insert_at_beginning(self, data):    
         new_node = Node(data)   # create a new node
-        new_node.next = self.head   # Link the new node to the previous head
-        self.head = new_node    # update the point to the new node
+        new_node.next = self.head_node   # Link the new node to the previous head
+        self.head_node = new_node # update the point to the new node
+        if not self.tail_node:
+            self.tail_node = new_node
 
-    def instert_at_end(self, data):
+    def insert_at_end(self, data):      # insert data at the beginning
         new_node = Node(data)   
-        if not self.head:
-            self.head = new_node
+        if not self.head_node:          
+            self.head_node = self.tail_node = new_node
             return
-        last = self.head
-        while last.next:        # traverse to the last node
-            last = last.next
-        last.next = new_node    # link the last node to the new node
+        self.tail.next = new_node
+        self.tail = new_node
 
-    def delete(self, key):
-        current = self.head
-        if current and current.data == key:     # if the node to delete is the head
-            self.head = current.next            # Move the head to the next node
-            current = None
-            return
+    def delete(self, node_key):
+        current_node = self.head
         prev = None
 
-        while current and current.data != key:
-            prev = current
-            current = current.next
-        if not current: #if the node to delete is not found 
-            return "Node not found"
+        # check if any node_key match any node data in the list
+        while current_node and current_node.data != node_key:  
+            previous_node = current_node
+            current_node = current_node.next
 
-        prev.next = current.next    #Unlink the node
-        current = None
-    
+            if not current_node:        # return false when no node data match the key
+                return False
+
+        # if find the matching node doesn't have a previous node it the head_node to delete
+        if previous_node is None:
+            self.head_node = current_node.next
+            if self.head_node is None:      # if head_node is empty than list is empty
+                self.tail_node = None
+        else: 
+            previous_node.next = current_node.next
+            if previous_node.next is None:
+                self.tail_node = previous_node
+        return True
+
     def print_list(self):
-            current = self.head
-            if not current:
-                print('List is empty')
-                return
+        current_node = self.head
+        if not current_node:
+            print('List is empty')
+            return
 
-            while current:
-                print(current.data, end=" -> ")
-                current = current.next
+            while current_node:
+                print(current_node.data, end=" -> ")
+                current_node = current.next
             print("None") # end of the list
 
+    def merge_sort(self):
+        algorithm = Algorithms()
+        return False
 
