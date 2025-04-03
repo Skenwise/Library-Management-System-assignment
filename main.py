@@ -13,14 +13,17 @@ print('Enter your credential to Login or to register \n')
 username = input("Enter your name: ")
 age = int(input("Enter your age: "))
 profession = input("Enter your profession: ")
+email = input("Enter your email address: ")
 register = False
 
 while register is False:
     authentification = input('\nEnter (1) to login or (2) to register: ')
     if authentification =='1':
-        register = library.is_register()
+        user_id = int(input("Enter your user ID: "))
+        register = library.is_register(user_id, email)
+        print(register)
     elif authentification == '2':
-        library.register_new_user(username, age, profession)
+        library.register_new_user(username, age, profession, email)
         register = True
         print("Now you can continue\n")
     else:
@@ -93,5 +96,9 @@ while True:
 
     elif choice == '9':
         break
+
+    elif choice == '10':
+        user_id = int(input("Enter your user ID: "))
+        library.is_register(user_id)
     else:
         print("Wrong number Entered! Choose between the available operations")
