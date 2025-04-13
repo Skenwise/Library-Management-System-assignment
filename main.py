@@ -9,20 +9,20 @@ print('Welcome to the Zcas Library Management System \n')
 
 library = Library()
 
-print('Enter your credential to Login or to register \n')
-username = input("Enter your name: ")
-age = int(input("Enter your age: "))
-profession = input("Enter your profession: ")
-email = input("Enter your email address: ")
 register = False
 
 while register is False:
     authentification = input('\nEnter (1) to login or (2) to register: ')
     if authentification =='1':
         user_id = int(input("Enter your user ID: "))
+        email = input("Enter your email address: ")
         register = library.is_register(user_id, email)
         print(register)
     elif authentification == '2':
+        username = input("Enter your name: ")
+        age = int(input("Enter your age: "))
+        profession = input("Enter your profession: ")
+        email = input("Enter your email address: ")
         library.register_new_user(username, age, profession, email)
         register = True
         print("Now you can continue\n")
@@ -32,7 +32,7 @@ while register is False:
 while True:
     print("\nOPERATION")
     print("-------------\n")
-    print("1. Find a user in the library \n2. Display all the users in the library \n3. Add a book to the library \n4. Display all the book in the library \n5. Find a book in the library \n6. Borrow a book \n7. Check if a book is available \n8. Display recent library transaction \n9. Quit \n")
+    print("1. Find a user in the library \n2. Display all the users in the library \n3. Add a book to the library \n4. Display all the book in the library \n5. Find a book in the library \n6. Borrow a book \n7. Check if a book is available \n8. Display recent library transaction \n9. return book \n10. Quit \n")
     choice = input("Choose the operation you want to execute: ")
 
     if choice == '1':
@@ -69,8 +69,6 @@ while True:
             elif option1 == '2':
                 search_key = "author"
             elif option1 == '3':
-                search_key = "year_published"
-            elif option1 == '4':
                 search_key = "editor"
             else:
                 print("This category is not available")
@@ -84,8 +82,9 @@ while True:
 
     elif choice == '6':
         user_id = int(input("Enter your user_id: "))
+        email = input("Enter your email address: ")
         ISBN = (input("Enter the ISBN of the book: "))
-        library.borrow_book(ISBN, user_id)
+        library.borrow_book(ISBN, user_id, email)
 
     elif choice == '7':
         ISBN = input("Enter the ISBN of the book: ")
@@ -95,9 +94,15 @@ while True:
         library.recent_book_transaction()
 
     elif choice == '9':
-        break
+        ISBN = input("Enter the ISBN of the book: ")
+        user_id = int(input("Enter your user ID: "))
+        email = input("Enter your email address:  ")
+        library.return_book(ISBN, user_id, email)
 
     elif choice == '10':
+        break 
+
+    elif choice == '11':
         user_id = int(input("Enter your user ID: "))
         library.is_register(user_id)
     else:

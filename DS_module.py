@@ -100,7 +100,7 @@ class HashTable:
 
 class LMS_hastable(HashTable):
     def __init__(self):
-        self.capacity = 100
+        self.capacity = 1009
         self.library = [{} for _ in range(self.capacity)]
 
     def __len__(self):
@@ -108,28 +108,28 @@ class LMS_hastable(HashTable):
 
     def __getitem__(self, index):
         return self.library[index]
-    
+
     # find the ascii value of a number
     def find_number_value(self, number):
         value = ord(number)
         return value
 
     def hashFunction(self, ISBN):
-        ascii_value = 0
-        numbers = self.split_word_into_letter(ISBN)
-        for number in numbers:
-            ascii_value += self.find_number_value(number)
-        index = self.findIndex(ascii_value, self.capacity)
+        ISBN = int(ISBN)
+        index = ISBN % self.capacity
         return index
 
     def insert_book(self, ISBN, book):
-        index = self.hashFunction(ISBN)
-        self.library.insert(index, ({'book': book}))
-        print("book added")
+        ISBN = int(ISBN)
+        index = self.hashFunction(int(ISBN))
+        if 'book' not in self.library[index]:
+            self.library[index] = {}
+        self.library[index]['book'] = book
    
     def display_list_of_book(self):
         filtered_library_book = [book for book in self.library if "book" in book]
-        print(filtered_library_book)
+        for book in filtered_library_book:
+            print(f'{book}\n')
 
 
     def delete_book(self, ISBN):
@@ -138,7 +138,7 @@ class LMS_hastable(HashTable):
                 self.library.remove(book)
 
     def find_book(self, ISBN):
-        index = self.hashFunction(ISBN)
+        index = self.hashFunction(int(ISBN))
         return self.library[index]
 
 # this class represent a stack data structure FILO to handle data
